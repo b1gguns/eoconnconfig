@@ -2,28 +2,38 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
-
-    handleNameChange = (event) => {
-       console.log('Not about to crash..');
-       this.setState({name: event.target.value});
-       console.log('State changed to ' + this.state.name);
-    };
-
+class ConfigForm extends Component{
   constructor(props){
     super(props);
 
     this.state = {name: ''};
-
-    // instead using fat arrow functions to bind this
-    //this.handleNameChange = this.handleNameChange.bind(this);    
-    //this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // handleNameChange(event) {
-  //   console.log('About to crash..');
-  //   this.setState({value: event.target.value});
-  // }
+  handleNameChange = (event) => {
+    console.log('Not about to crash..');
+    this.setState({name: event.target.value});
+    console.log('State changed to ' + event.target.value);
+  };
+
+  handleSubmit = (event) => {
+    console.log('A form was submitted with a name: ' + this.state.name)
+    event.preventDefault();
+  };
+
+  render(){
+    return (
+       <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input type="text" value={this.state.value} onChange={this.handleNameChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+    );
+  }
+}
+
+class App extends Component {
 
   render() {
     return (
@@ -35,13 +45,7 @@ class App extends Component {
         <p className="App-intro">
           Here we are. This is a progressive web app.
         </p>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleNameChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <ConfigForm/>
       </div>
     );
   }
