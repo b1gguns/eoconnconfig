@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
 class ConfigForm extends Component{
@@ -20,23 +20,29 @@ class ConfigForm extends Component{
   };
 
   handleSubmit = (event) => {
-    console.log('A form was submitted with a name: ' + this.state.name)
+    console.log('A form was submitted with a name: ' + this.state.firstName)
     event.preventDefault();
   };
 
   render(){
     return (
        <form onSubmit={this.handleSubmit}>
+       <div className="Form-row">
           <label>
             First name:
             <input name="firstName" type="text" value={this.state.value} onChange={this.handleInputChange} />
           </label>
+        </div>
+        <div className="Form-row">
           <label>
             Last name:
             <input name="lastName" type="text" value={this.state.value} onChange={this.handleInputChange} />
 
           </label>
-          <input type="submit" value="Submit" />
+          </div>
+          <div className="Form-row">
+            <input type="submit" value="Submit" />
+          </div>
         </form>
     );
   }
@@ -48,11 +54,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          Here we are. This is a progressive web app.
         </p>
         <ConfigForm/>
       </div>
