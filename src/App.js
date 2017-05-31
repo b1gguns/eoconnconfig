@@ -9,10 +9,14 @@ class ConfigForm extends Component{
     this.state = {name: ''};
   }
 
-  handleNameChange = (event) => {
-    console.log('Not about to crash..');
-    this.setState({name: event.target.value});
-    console.log('State changed to ' + event.target.value);
+  handleInputChange = (event) => {
+    console.log('Enter handleInputChange...');
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({[name]: value});
+    console.log('State of ' + name + ' changed to ' + value);
   };
 
   handleSubmit = (event) => {
@@ -24,8 +28,13 @@ class ConfigForm extends Component{
     return (
        <form onSubmit={this.handleSubmit}>
           <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleNameChange} />
+            First name:
+            <input name="firstName" type="text" value={this.state.value} onChange={this.handleInputChange} />
+          </label>
+          <label>
+            Last name:
+            <input name="lastName" type="text" value={this.state.value} onChange={this.handleInputChange} />
+
           </label>
           <input type="submit" value="Submit" />
         </form>
